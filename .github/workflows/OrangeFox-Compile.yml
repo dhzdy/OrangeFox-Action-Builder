@@ -20,19 +20,19 @@ on:
       DEVICE_TREE:
         description: 'OrangeFox Device Tree'
         required: true
-        default: 'https://github.com/dhzdy/tb8788p1_64_bsp_k419'   # ← 已改为你的设备树
+        default: 'https://github.com/dhzdy/tb8788p1_64_bsp_k419'
       DEVICE_TREE_BRANCH:
         description: 'OrangeFox Device Tree Branch'
         required: true
-        default: 'main'                                            # ← 已改为 main
+        default: 'main'
       DEVICE_PATH:
         description: 'Specify your Device Path'
         required: true
-        default: 'device/zyb/tb8788p1_64_bsp_k419'                 # ← 已改为你的路径
+        default: 'device/zyb/tb8788p1_64_bsp_k419'
       DEVICE_NAME:
         description: 'Specify your Device Codename'
         required: true
-        default: 'tb8788p1_64_bsp_k419'                           # ← 已改为你的代号
+        default: 'tb8788p1_64_bsp_k419'
       BUILD_TARGET:
         description: 'Specify your Build Target'
         required: true
