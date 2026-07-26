@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       MANIFEST_BRANCH:
-        description: 'OrangeFox Manifest Branch'
+        description: 'OrangeFox 清单分支'
         required: true
         default: '12.1'
         type: choice
@@ -18,23 +18,23 @@ on:
         - 12.1
         - 14.1
       DEVICE_TREE:
-        description: 'OrangeFox Device Tree'
+        description: 'OrangeFox 设备树'
         required: true
         default: 'https://github.com/ymdzq/OFRP-device_xiaomi_mondrian'
       DEVICE_TREE_BRANCH:
-        description: 'OrangeFox Device Tree Branch'
+        description: 'OrangeFox 设备树分支'
         required: true
         default: 'fox_12.1-a16'
       DEVICE_PATH:
-        description: 'Specify your Device Path'
+        description: '指定你的设备路径'
         required: true
         default: 'device/xiaomi/mondrian'
       DEVICE_NAME:
-        description: 'Specify your Device Codename'
+        description: '指定你的设备代号'
         required: true
         default: 'mondrian'
       BUILD_TARGET:
-        description: 'Specify your Build Target'
+        description: '指定你的构建目标'
         required: true
         default: 'recovery'
         type: choice
@@ -43,7 +43,7 @@ on:
         - recovery
         - vendorboot
       MAGISK_VERSION:
-        description: 'Specify your Magisk Version'
+        description: '指定你的 Magisk 版本'
         required: true
         default: 'Magisk'
         type: choice
@@ -52,12 +52,12 @@ on:
         - MagiskAlpha
         - MagiskDelta
       ADD_WLAN_SUPPORT:
-        description: 'Add WLAN support (EXPERIMENTAL!!)'
+        description: '添加 WLAN 支持（实验性！！）'
         type: boolean
         required: true
         default: false
       USE_CCACHE:
-        description: Use ccache for compilation
+        description: 编译时使用 ccache
         type: boolean
         required: true
         default: true
@@ -140,7 +140,7 @@ jobs:
       if: inputs.MANIFEST_BRANCH == '12.1'
       run: |
         cd ${GITHUB_WORKSPACE}/OrangeFox/fox_${{ inputs.MANIFEST_BRANCH }}/bootable/recovery
-        git remote add ymdzq https://github.com/ymdzq/OrangeFox_Recovery && git fetch ymdzq fox_12.1 && git merge --no-ff ymdzq/fox_12.1 -m "Apply custom patches"
+        git remote add ymdzq https://github.com/ymdzq/OrangeFox_Recovery && git fetch ymdzq fox_12.1 && git merge --no-ff ymdzq/fox_12.1 -m "Apply custom patches" -X theirs
         if [ "${{ inputs.ADD_WLAN_SUPPORT }}" = "true" ]; then
         wget "https://github.com/ymdzq/OrangeFox_Recovery/commit/f8712872b9ec663b658a1e8eba4840877fe45ea6.patch" -O wlan.patch
         git am wlan.patch
@@ -231,4 +231,3 @@ jobs:
           Build: fox_${{ inputs.MANIFEST_BRANCH }}
           Device: [Device Tree/Branch](${{ env.DEVICE_TREE_URL }}/tree/${{ inputs.DEVICE_TREE_BRANCH }})
           Commit: Most recent [commit](${{ env.DEVICE_TREE_URL }}/commit/${{ env.COMMIT_ID }}) during building.
-          
